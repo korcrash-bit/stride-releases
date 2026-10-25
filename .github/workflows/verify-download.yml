@@ -1,0 +1,23 @@
+name: Verify public APK download
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/verify-download.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out verified original APK
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Download public release without authentication
+        run: |
+          curl --fail --location --proto '=https' --proto-redir '=https' --max-time 90 --output downloaded.apk 'https://github.com/korcrash-bit/stride-releases/releases/download/v0.3.2/STRIDE-0.3.2.apk'
+          test "$(wc -c < downloaded.apk | tr -d ' ')" = "3605382"
+          echo '0901e7850c79dc3d278cdb586db724d2b4f27256ba36007df1ee057fd17a47f4  downloaded.apk' | sha256sum --check
+          cmp apk/STRIDE-0.3.2.apk downloaded.apk
+          echo 'Verified public download: 3605382 bytes'
+          sha256sum downloaded.apk
