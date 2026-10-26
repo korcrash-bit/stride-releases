@@ -1,11 +1,13 @@
-STRIDE Android v0.3.2
+STRIDE Android v0.3.3
 
-Android 8.0 이상 · 패키지 kr.stride.workout
+휴대폰 시스템 하단바에 앱의 하단 메뉴가 가려지는 문제를 수정했습니다. 시스템 표시줄과 키보드 영역에 맞춰 앱 화면을 배치합니다.
 
-운동 기록, 캘린더, 운동 순서 변경, 휴식 타이머와 Google Drive 백업·복원을 포함한 초기 Android 버전입니다. 인터넷 연결이 필요합니다.
+- Android 8.0 이상 · 패키지 kr.stride.workout · 버전 코드 6
+- v0.3.2와 같은 서명이므로 기존 앱을 삭제하지 말고 업데이트 설치하세요.
+- 기존 운동 기록과 인증 방식은 유지합니다.
+- 릴리스 빌드·Android 정적 검사·APK v2 서명 검증을 통과했습니다.
+- 실제 휴대폰의 버튼/제스처 내비게이션 및 Google 로그인은 추가 확인이 필요합니다.
 
-APK v2 서명 검증과 타입 검사, 자동 테스트 39개를 통과했습니다. 실제 휴대폰의 Google 로그인·기존 기록 조회·Drive 백업 및 복원은 아직 검증 전입니다.
-
-파일: STRIDE-0.3.2.apk
-크기: 3,605,382 bytes
-SHA-256: 0901e7850c79dc3d278cdb586db724d2b4f27256ba36007df1ee057fd17a47f4
+파일: STRIDE-0.3.3.apk
+크기: 3,605,274 bytes
+SHA-256: 43dbb30a30f58e1fdd4de7954ec707eccd9d04fca484cd3d375df0f74b96d190
