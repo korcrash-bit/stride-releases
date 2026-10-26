@@ -15,9 +15,9 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Download public release without authentication
         run: |
-          curl --fail --location --proto '=https' --proto-redir '=https' --max-time 90 --output downloaded.apk 'https://github.com/korcrash-bit/stride-releases/releases/download/v0.3.4/STRIDE-0.3.4.apk'
-          test "$(wc -c < downloaded.apk | tr -d ' ')" = "3634486"
-          echo 'f63f445a7fdc15024844699721c33f7a507befcffdead09f49a635617a671041  downloaded.apk' | sha256sum --check
-          cmp apk/STRIDE-0.3.4.apk downloaded.apk
-          echo 'Verified public download: 3634486 bytes'
+          curl --fail --location --proto '=https' --proto-redir '=https' --max-time 90 --output downloaded.apk 'https://github.com/korcrash-bit/stride-releases/releases/download/v0.4.0/STRIDE-0.4.0.apk'
+          test "$(wc -c < downloaded.apk | tr -d ' ')" = "3638146"
+          echo '072d2fecfda5de5aa4b742fbdd710f3979b70a18deaa91257ee4de8b50365810  downloaded.apk' | sha256sum --check
+          cmp apk/STRIDE-0.4.0.apk downloaded.apk
+          echo 'Verified public download: 3638146 bytes'
           sha256sum downloaded.apk
