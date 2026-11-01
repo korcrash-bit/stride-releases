@@ -2,12 +2,12 @@ name: Publish verified STRIDE APK
 on:
   push:
     branches: [main]
-    paths: ['apk/STRIDE-0.4.0.apk']
+    paths: ['apk/STRIDE-0.5.0.apk']
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: stride-android-v0.4.0
+  group: stride-android-v0.5.0
   cancel-in-progress: false
 jobs:
   release:
@@ -18,11 +18,18 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Verify APK before publishing
         run: |
-          test "$(wc -c < apk/STRIDE-0.4.0.apk | tr -d ' ')" = "3638146"
+          test "$(wc -c < apk/STRIDE-0.5.0.apk | tr -d ' ')" = "3641182"
           sha256sum --check SHA256SUMS.txt
       - name: Publish APK release
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh release create v0.4.0 apk/STRIDE-0.4.0.apk SHA256SUMS.txt --target "$GITHUB_SHA" --title "STRIDE Android v0.4.0" --notes-file RELEASE_NOTES.md
+          gh release create v0.5.0 apk/STRIDE-0.5.0.apk SHA256SUMS.txt --target "$GITHUB_SHA" --title "STRIDE Android v0.5.0" --notes-file RELEASE_NOTES.md
+      - name: Verify public APK download matches the signed original
+        run: |
+          curl --fail --location --proto '=https' --proto-redir '=https' --retry 3 --max-time 90 --output downloaded.apk 'https://github.com/korcrash-bit/stride-releases/releases/download/v0.5.0/STRIDE-0.5.0.apk'
+          test "$(wc -c < downloaded.apk | tr -d ' ')" = "3641182"
+          echo 'b48f62fc59f020a362f62900853ff37687eaeb0812d5292df1ea812fd696b565  downloaded.apk' | sha256sum --check
+          cmp apk/STRIDE-0.5.0.apk downloaded.apk
+          echo 'Verified public APK: 3641182 bytes; exact match to original'
